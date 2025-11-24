@@ -25,6 +25,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const closeLoginModal = document.querySelector(".close-login-modal");
   const loginMessage = document.getElementById("login-message");
 
+  // Configuration constants
+  const SCHOOL_NAME = "Mergington High School";
+
   // Activity categories with corresponding colors
   const activityTypes = {
     sports: { label: "Sports", color: "#e8f5e9", textColor: "#2e7d32" },
@@ -475,7 +478,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Function to handle sharing activities
   function handleShare(activityName, details, classList) {
     const formattedSchedule = formatSchedule(details);
-    const shareText = `Check out ${activityName} at Mergington High School! ${details.description} Schedule: ${formattedSchedule}`;
+    const shareText = `Check out ${activityName} at ${SCHOOL_NAME}! ${details.description} Schedule: ${formattedSchedule}`;
     const shareUrl = window.location.href;
     
     if (classList.contains('share-twitter')) {
@@ -485,11 +488,11 @@ document.addEventListener("DOMContentLoaded", () => {
       const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareUrl)}&quote=${encodeURIComponent(shareText)}`;
       window.open(facebookUrl, '_blank', 'width=550,height=420');
     } else if (classList.contains('share-linkedin')) {
-      const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`;
+      const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}&text=${encodeURIComponent(shareText)}`;
       window.open(linkedinUrl, '_blank', 'width=550,height=420');
     } else if (classList.contains('share-email')) {
       const subject = `Activity: ${activityName}`;
-      const body = `I thought you might be interested in this activity at Mergington High School:\n\n${activityName}\n${details.description}\n\nSchedule: ${formattedSchedule}\n\nLearn more: ${shareUrl}`;
+      const body = `I thought you might be interested in this activity at ${SCHOOL_NAME}:\n\n${activityName}\n${details.description}\n\nSchedule: ${formattedSchedule}\n\nLearn more: ${shareUrl}`;
       window.location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     }
   }
