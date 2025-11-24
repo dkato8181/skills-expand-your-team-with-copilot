@@ -872,9 +872,10 @@ document.addEventListener("DOMContentLoaded", () => {
     
     if (savedTheme === "dark") {
       enableDarkMode();
-    } else {
+    } else if (savedTheme === "light") {
       disableDarkMode();
     }
+    // If no preference is saved, default to light mode (no action needed)
   }
 
   function enableDarkMode() {
