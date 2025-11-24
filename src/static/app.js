@@ -867,15 +867,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Dark mode functionality
   function initializeDarkMode() {
-    // Check if user has a saved preference
+    // Check if user has a saved preference for dark mode
     const savedTheme = localStorage.getItem("theme");
     
     if (savedTheme === "dark") {
-      enableDarkMode();
-    } else if (savedTheme === "light") {
-      disableDarkMode();
+      document.body.classList.add("dark-mode");
+      darkModeIcon.textContent = "☀️";
+    } else {
+      // Default to light mode (no class needed, icon already set in HTML)
+      darkModeIcon.textContent = "🌙";
     }
-    // If no preference is saved, default to light mode (no action needed)
   }
 
   function enableDarkMode() {
