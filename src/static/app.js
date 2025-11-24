@@ -25,6 +25,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const closeLoginModal = document.querySelector(".close-login-modal");
   const loginMessage = document.getElementById("login-message");
 
+  // Dark mode elements
+  const darkModeToggle = document.getElementById("dark-mode-toggle");
+  const darkModeIcon = document.getElementById("dark-mode-icon");
   // Configuration constants
   const SCHOOL_NAME = "Mergington High School";
 
@@ -919,7 +922,45 @@ document.addEventListener("DOMContentLoaded", () => {
     setTimeRangeFilter,
   };
 
+  // Dark mode functionality
+  function initializeDarkMode() {
+    // Check if user has a saved preference for dark mode
+    const savedTheme = localStorage.getItem("theme");
+    
+    if (savedTheme === "dark") {
+      document.body.classList.add("dark-mode");
+      darkModeIcon.textContent = "☀️";
+    } else {
+      // Default to light mode (no class needed, icon already set in HTML)
+      darkModeIcon.textContent = "🌙";
+    }
+  }
+
+  function enableDarkMode() {
+    document.body.classList.add("dark-mode");
+    darkModeIcon.textContent = "☀️";
+    localStorage.setItem("theme", "dark");
+  }
+
+  function disableDarkMode() {
+    document.body.classList.remove("dark-mode");
+    darkModeIcon.textContent = "🌙";
+    localStorage.setItem("theme", "light");
+  }
+
+  function toggleDarkMode() {
+    if (document.body.classList.contains("dark-mode")) {
+      disableDarkMode();
+    } else {
+      enableDarkMode();
+    }
+  }
+
+  // Event listener for dark mode toggle
+  darkModeToggle.addEventListener("click", toggleDarkMode);
+
   // Initialize app
+  initializeDarkMode();
   checkAuthentication();
   initializeFilters();
   fetchActivities();
